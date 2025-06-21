@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import dbConnect from "../../../src/lib/mongodb";
-import User from "../../../src/models/User";
+import dbConnect from "../../../lib/mongodb";
+import User from "../../../models/User";
 
 export default NextAuth({
   providers: [

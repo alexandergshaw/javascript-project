@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
+import ChatRooms from "@/components/ChatRooms";
 
 type ExtendedUser = {
   name?: string | null;
@@ -53,6 +54,7 @@ export default function Home() {
         ) : (
           <button onClick={() => signIn()}>Sign in</button>
         )}
+        {session && session.user?.id && <ChatRooms userId={session.user.id} />}
       </main>
     </div>
   );
