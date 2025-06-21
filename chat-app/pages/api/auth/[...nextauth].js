@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import dbConnect from "../../../src/lib/mongodb";
+import User from "../../../src/models/User";
 
 export default NextAuth({
   providers: [
@@ -13,4 +15,21 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      await dbConnect();
+      await User.findOneAndUpdate(
+        { email: user.email },
+        { $set: { name: user.name, image: user.image } },
+        { upsert: true, new: true }
+      );
+      return true;
+    },
+    async session({ session }) {
+      await dbConnect();
+      const dbUser = await User.findOne({ email: session.user.email });
+      session.user.id = dbUser?._id;
+      return session;
+    },
+  },
 });
