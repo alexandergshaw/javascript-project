@@ -83,6 +83,10 @@ NEXTAUTH_URL=http://localhost:3000
 
 Replace the values with your actual credentials.
 
+> **Note:**  
+> If you are running this project in GitHub Codespaces or any remote environment, set `NEXTAUTH_URL` in your `.env.local` to your Codespace’s public URL (e.g., `https://your-codespace-id-3000.app.github.dev/`).  
+> Also, update your Google and GitHub OAuth app callback URLs to match this
+
 ---
 
 ## 5. Wrap Your App with SessionProvider
