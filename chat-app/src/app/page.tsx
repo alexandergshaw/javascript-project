@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -98,6 +103,20 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
+      <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '4rem' }}>
+        <h1>Welcome to Chat App</h1>
+        {session ? (
+          <>
+            <p>Signed in as {session.user?.email}</p>
+            <button onClick={() => signOut()}>Sign out</button>
+          </>
+        ) : (
+          <>
+            <p>Please sign in to continue.</p>
+            <button onClick={() => signIn()}>Sign in</button>
+          </>
+        )}
+      </main>
     </div>
   );
 }
