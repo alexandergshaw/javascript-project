@@ -304,3 +304,6 @@ export default NextAuth({
 ## 7. Fetch/Display User Profile Info
 
 You can now use `useSession()` in your client components to access user info, or create an API route to fetch more profile data from MongoDB
+
+> **MongoDB Atlas IP Whitelist Note:**  
+> If you see a MongoDB connection error about IP whitelisting, go to your MongoDB Atlas dashboard, navigate to **Network Access**, and add your current IP address or `0.0.0.0/0` (for development only) to the IP Access List.
